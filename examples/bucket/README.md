@@ -1,0 +1,3 @@
+```
+<command> prepare-stacks bucket
+```

@@ -1,0 +1,11 @@
+# Defines a single S3 bucket.
+Description: "Example S3 bucket."
+Resources:
+  Bucket:
+    Type: "AWS::S3::Bucket"
+    Properties:
+      AccessControl: "Private"
+  Outputs:
+    BucketName:
+      Description: "The name of the example S3 bucket."
+      Value: !Ref Bucket

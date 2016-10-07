@@ -1,0 +1,18 @@
+# Defines a single internet gateway attached to a given VPC.
+Description: "Example internet gateway."
+Parameters:
+  VPCId:
+    Type: "String"
+Resources:
+  Gateway:
+    Type: "AWS::EC2::InternetGateway"
+    Properties:
+      Tags:
+        -
+          Key: "Environment"
+          Value: "{{ environment_name }}"
+  Attachment:
+    Type: "AWS::EC2::VPCGatewayAttachment"
+    Properties:
+      VpcId: {{ vpc_id }}
+      InternetGatewayId: !Ref Gateway

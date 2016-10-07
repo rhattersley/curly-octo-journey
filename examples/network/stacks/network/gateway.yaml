@@ -1,0 +1,3 @@
+template: "gateway.yaml"
+
+vpc_id: !Ref vpc.VpcId

@@ -1,0 +1,15 @@
+# Defines a single VPC.
+Description: "Example VPC."
+Resources:
+  VPC:
+    Type: "AWS::EC2::VPC"
+    Properties:
+      CidrBlock: {{ cidr_block }}
+      Tags:
+        -
+          Key: "Environment"
+          Value: "{{ environment_name }}"
+  Outputs:
+    VpcId:
+      Description: "The ID of the example VPC."
+      Value: !Ref VPC
