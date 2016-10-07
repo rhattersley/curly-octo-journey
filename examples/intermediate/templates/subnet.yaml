@@ -1,0 +1,6 @@
+Resources:
+    PublicSubnet:
+        Type: AWS::EC2::Subnet
+        Properties:
+            CidrBlock: 10.10.128.0/15
+            VpcId: {{ vpc_id }}

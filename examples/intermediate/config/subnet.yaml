@@ -1,0 +1,2 @@
+template: subnet
+vpc_id: !StackOutput vpc.VPCID

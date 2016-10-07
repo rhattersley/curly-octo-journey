@@ -1,0 +1,41 @@
+# Configuration
+# 1)
+# Evaluates to vpc-18ac277d
+vpc_id: !Ref vpc.VPCID
+# 2a)
+# Evaluates to "!ImportValue vpc-VPCID"
+vpc_id: !Ref vpc.VPCID
+#nacl_id: !Ref vpc.my-nacl-id-for-vpc
+---
+# Template
+Resources:
+    Type: AWS::EC2::Subnet
+    Properties:
+        CidrBlock: 10.10.128.0/15
+        # 1)
+        VpcId: {{ vpc_id }}
+        # 2a)
+        VpcId: {{ vpc_id }}
+        # 2b)
+        # Requires parsing the YAML... and embeds the stack name :-(
+        VpcId: !StackOutput vpc.VPCID
+        # 2c)
+        # Embeds the stack name :-(
+        VpcId: {{ stack_output('vpc', 'VPCID') }}
+---
+# Stack metadata
+stack_name: subnet  # Could be implicit in file name?
+---
+# Raw template
+Resources:
+    Type: AWS::EC2::Subnet
+    Properties:
+        CidrBlock: 10.10.128.0/15
+        # Inter-stack dependencies can't be resolved until the
+        # dependency has been created. So either:
+        #   1) Generate each raw template in turn.
+        #       * Can't use raw templates as the intermediate form.
+        #       * Simple func syntax in config:
+        VpcId: vpc-18ac277d
+        #   2) Use CF cross-stack references?
+        VpcId: !ImportValue vpc-VPCID

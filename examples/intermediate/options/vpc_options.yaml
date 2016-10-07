@@ -1,0 +1,35 @@
+# Configuration
+cidr_block: 10.10.0.0/16
+---
+# Template
+Resources:
+    VPC:
+        Type: AWS::EC2::VPC
+        Properties:
+            CidrBlock: {{ cidr_block }}
+Outputs:
+    VPCID:
+        Value: !Ref VPC
+    # Demo of user-defined export.
+    DefaultNaclId:
+        Value: !GetAtt VPC.DefaultNetworkAcl
+        Export:
+            Name: !Sub my-nacl-id-for-${AWS::StackName}}
+---
+# Stack metadata
+stack_name: vpc
+---
+# Raw template
+Resources:
+    VPC:
+        Type: AWS::EC2::VPC
+        Properties:
+            CidrBlock: 10.10.0.0/16
+Outputs:
+    VPCID:
+        Value: !Ref VPC
+        # 2)
+        # Implies the user can't use their own Exports?
+        # No... but a user-defined export should take precedence.
+        Export:
+            Name: vpc-VPCID

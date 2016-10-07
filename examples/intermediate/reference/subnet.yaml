@@ -1,0 +1,21 @@
+# Configuration
+vpc_id: !Ref vpc.VPCID
+---
+# Template
+Resources:
+    PublicSubnet:
+        Type: AWS::EC2::Subnet
+        Properties:
+            CidrBlock: 10.10.128.0/15
+            VpcId: {{ vpc_id }}
+---
+# Stack metadata
+stack_name: subnet  # Could be implicit in file name?
+---
+# Raw template
+Resources:
+    PublicSubnet:
+        Type: AWS::EC2::Subnet
+        Properties:
+            CidrBlock: 10.10.128.0/15
+            VpcId: !ImportValue vpc-VPCID
