@@ -1,0 +1,21 @@
+# Defines an S3 bucket.
+Description: "S3 bucket"
+Resources:
+  Bucket:
+    Type: "AWS::S3::Bucket"
+    Properties:
+      BucketName: "{{ bucket_prefix + environment_name }}"
+      Tags:
+        - Key: Environment
+          Value: {{ environment_name }}
+        - Key: Project
+          Value: {{ project_name }}
+        - Key: ServiceOwner
+          Value: {{ service_owner }}
+        - Key: ServiceCode
+          Value: {{ service_code }}
+        - Key: ServiceName
+          Value: {{ service_name }}
+Outputs:
+  BucketName:
+    Value: !Ref Bucket

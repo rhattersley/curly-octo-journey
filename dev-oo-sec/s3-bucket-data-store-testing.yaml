@@ -1,0 +1,9 @@
+template_path: templates/s3bucket.yaml
+---
+bucket_prefix: oo-data-store-testing-
+environment_name: dev
+env_dir: dev-oo-sec
+project_name: oo
+service_owner: foo@example.com
+service_name: testing
+service_code: AB0123

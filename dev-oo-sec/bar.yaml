@@ -1,0 +1,7 @@
+template_path: templates/object_service.yaml
+---
+bucket_name: !Resource object-service-testing.BucketName
+project_name: oo
+service_owner: foo@example.com
+service_name: testing
+service_code: AB0123
